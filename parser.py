@@ -33,7 +33,7 @@ response = requests.post(url, headers=HEADERS, data=RAW_DATA)
 
 
 if response.status_code != 200:
-    print(f"❌ Ошибка: {response.status_code}")
+    print(f"Ошибка: {response.status_code}")
     print(response.text[:500])
     exit()
 
@@ -42,7 +42,7 @@ try:
     data = response.json()
     items = data["Body"]["GoodsItemList"]
 except (KeyError, json.JSONDecodeError) as e:
-    print("❌ Не удалось распарсить ответ:", e)
+    print("Не удалось распарсить ответ:", e)
     exit()
 
 # Формируем словарь для дальнейшнего сохранения в JSON
@@ -60,4 +60,4 @@ for item in items:
 with open("products.json", "w", encoding="utf-8") as f:
     json.dump(products, f, ensure_ascii=False, indent=2)
 
-print(f"✅ Успешно сохранено {len(products)} товаров в products.json")
+print(f"Успешно сохранено {len(products)} товаров в products.json")
